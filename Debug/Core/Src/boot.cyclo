@@ -1,7 +1,0 @@
-../Core/Src/boot.c:8:13:FooterPayloadSane	4
-../Core/Src/boot.c:22:13:ValidateImage	4
-../Core/Src/boot.c:43:10:GetAppSize	5
-../Core/Src/boot.c:55:6:SetDefaultBoot	1
-../Core/Src/boot.c:62:6:BootProcess	18
-../Core/Src/boot.c:175:10:crc32	2
-../Core/Src/boot.c:185:10:Image_crc32	4
