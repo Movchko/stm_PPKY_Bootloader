@@ -96,7 +96,9 @@ void BootProcess(void)
 	}
 
 	if (WATCHDOG != ReadBootWatchDog()) {
-		EraseApp(UPDATE);
+		//EraseApp(UPDATE);
+		//EraseApp(DEFAULT);
+		//EraseApp(MAIN);
 		EraseCfg();
 		WriteBootWatchDog();
 		is_change_main = true;

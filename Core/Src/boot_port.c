@@ -71,11 +71,16 @@ uint32_t ReadProgramWatchDog(void)
 
 void EraseCfg(void)
 {
+
+	//SPIF_EraseChip(&hFlash);
+
+
 	uint32_t i;
-	for (i = 0; i < FLASH_CFG_ERASE_BLOCKS; i++) {
+	for (i = 0; i < hFlash.BlockCnt; i++) {
 		(void)SPIF_EraseBlock(&hFlash, i);
 		BootLedToggle();
 	}
+
 }
 
 static uint8_t EraseSpiSlot(uint32_t start_block)
