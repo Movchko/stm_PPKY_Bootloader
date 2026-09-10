@@ -76,7 +76,7 @@ void EraseCfg(void)
 
 
 	uint32_t i;
-	for (i = 0; i < hFlash.BlockCnt; i++) {
+	for (i = 0; i < FLASH_CFG_ERASE_BLOCKS; i++) {
 		(void)SPIF_EraseBlock(&hFlash, i);
 		BootLedToggle();
 	}
