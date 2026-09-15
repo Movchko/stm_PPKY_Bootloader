@@ -4,6 +4,9 @@
 #include <stdint.h>
 
 /* --- Internal flash (STM32H523RE, 512 KB, dual-bank, 8 KB sectors) --- */
+/* Версия бутлоадера ППКУ. Имя файла при сборке прошивок: PPKU_bootloader_vN.bin */
+#define BOOTLOADER_VERSION_U32       1u
+
 #define BOOT_FLASH_BASE              0x08000000u
 /* text+data = 28220; +20% = 33864. 4 сектора = 32768 (<20%), 5 секторов = 40 КБ. */
 #define BOOTLOADER_CODE_SIZE         0x0000A000u  /* 40 KB: sectors 0..4 */
