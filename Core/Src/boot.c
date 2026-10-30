@@ -83,6 +83,12 @@ void BootProcess(void)
 		if (ValidateImage(MAIN, &main_footer)) {
 			main_ok_fl = true;
 			EraseApp(UPDATE);
+			/*
+			 * SetApp(MAIN) стирает Program WD. Намеренно НЕ пишем WD здесь:
+			 * приложение ставит флаг через ~3 с (Boot_WriteProgramWatchDog).
+			 * Если новый образ зависнет до этого — при следующем reset
+			 * (is_change_main==false, app_watchdog==false) → SetDefaultBoot().
+			 */
 		} else {
 			SetDefaultBoot();
 		}
@@ -96,10 +102,12 @@ void BootProcess(void)
 	}
 
 	if (WATCHDOG != ReadBootWatchDog()) {
-		//EraseApp(UPDATE);
-		//EraseApp(DEFAULT);
-		//EraseApp(MAIN);
-		EraseCfg();
+		/*
+		 * Первый старт после прошивки бутлоадера: только ставим Boot WD во
+		 * внутренний flash. Внешний SPI (cfg / factory / update / log) не трогаем —
+		 * иначе при отладке OTA теряются конфиги и журналы.
+		 * Ранее здесь был EraseCfg() (+ опционально EraseApp UPDATE/DEFAULT/MAIN).
+		 */
 		WriteBootWatchDog();
 		is_change_main = true;
 	}

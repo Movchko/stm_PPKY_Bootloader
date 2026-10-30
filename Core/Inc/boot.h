@@ -51,6 +51,7 @@ void BootReadBytes(FwImage type_fw, uint32_t byte_offset, uint8_t *dst, uint32_t
 uint32_t ReadBootWatchDog(void);
 void WriteBootWatchDog(void);
 uint32_t ReadProgramWatchDog(void);
+void WriteProgramWatchDog(void);
 void EraseCfg(void);
 
 void BootLedToggle(void);

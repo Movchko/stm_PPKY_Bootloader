@@ -69,6 +69,18 @@ uint32_t ReadProgramWatchDog(void)
 	return *(volatile uint32_t *)BOOT_PROGRAM_WD_ADDR;
 }
 
+void WriteProgramWatchDog(void)
+{
+	uint32_t quad_word[4] = { 0xFFFFFFFFu, 0xFFFFFFFFu, 0xFFFFFFFFu, WATCHDOG };
+
+	if (ReadProgramWatchDog() == WATCHDOG) {
+		return;
+	}
+	FlashOpsBegin();
+	(void)HAL_FLASH_Program(FLASH_TYPEPROGRAM_QUADWORD, BOOT_PROGRAM_WD_QWORD_ADDR, (uint32_t)quad_word);
+	FlashOpsEnd();
+}
+
 void EraseCfg(void)
 {
 
